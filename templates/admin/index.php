@@ -11,7 +11,7 @@
 <table border="solid">
     <th>ID</th>
     <th>TITLE</th>
-    <th>LEAD</th>
+    <th>CONTENT</th>
     <th>AUTHOR</th>
     <th>EDIT</th>
 

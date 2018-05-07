@@ -14,8 +14,6 @@
 
     <?php if (isset($this->article->author->name)) : ?>
         <h4>Автор: <?php echo $this->article->author->name ?></h4>
-   <?php else : ?>
-        <h4>Без автора</h4>
     <?php endif ?>
 
 

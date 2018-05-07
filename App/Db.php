@@ -28,10 +28,14 @@ class Db
      */
     public function __construct()
     {
+        try {
+            $this->cfg = new Config();
+            $this->dsn = 'mysql:host=' . $this->cfg->data['db']['host'] . ';dbname=' . $this->cfg->data['db']['dbname'];
+            $this->dbh = new \PDO($this->dsn, $this->cfg->data['db']['username'], $this->cfg->data['db']['password']);
+        } catch (\PDOException $error) {
+            throw new DbException('Ошибка в подключении базы данных');
+        }
 
-        $this->cfg = new Config();
-        $this->dsn = 'mysql:host=' . $this->cfg->data['db']['host'] . ';dbname=' . $this->cfg->data['db']['dbname'];
-        $this->dbh = new \PDO($this->dsn, $this->cfg->data['db']['username'], $this->cfg->data['db']['password']);
     }
 
     /**
@@ -44,7 +48,10 @@ class Db
     public function query($sql, $data=[], $class)
     {
         $sth = $this->dbh->prepare($sql);
-        $sth->execute($data);
+        $res = $sth->execute($data);
+        if(!$res) {
+            throw new DbException('Запрос не может быть выполнен');
+        }
         return $sth->fetchAll(\PDO::FETCH_CLASS, $class);
     }
 
