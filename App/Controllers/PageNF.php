@@ -9,6 +9,6 @@ class PageNF extends Controller
 {
     protected function actionDefault()
     {
-        $this->view->display(__DIR__ . '/../../templates/404/index.html');
+        $this->view->display(__DIR__ . '/../../templates/404/demo1.html');
     }
 }

@@ -2,16 +2,21 @@
 
 require __DIR__ . '/App/autoload.php';
 
-
 $uri = $_SERVER['REQUEST_URI'];
 
 $parts = explode('/', trim($uri, '/'));
 
 $ctrl = $parts[0] ? ucfirst($parts[0]) : 'Index';
 
-$action = $parts[1] ?: 'Default';
+$action = $parts[1] ?? 'Default';
+
+$class = '\App\Controllers\\' . $ctrl;
+
+if (!class_exists($class)) {
+    throw new \App\PageNFException();
+}
+
 try {
-    $class = '\App\Controllers\\' . $ctrl;
     $ctrl = new $class;
     $ctrl->action($action);
 } catch (\App\DbException $error) {

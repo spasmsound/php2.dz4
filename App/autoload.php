@@ -1,5 +1,10 @@
 <?php
 
 function __autoload($class) {
-   require_once __DIR__ . '/../' . str_replace('\\', '/', $class) . '.php';
+   $file = __DIR__ . '/../' . str_replace('\\', '/', $class) . '.php';
+   if (file_exists($file)) {
+       require_once $file;
+   } else {
+       return false;
+   }
 }
