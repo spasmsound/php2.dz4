@@ -123,4 +123,11 @@ abstract class Model
         $db->execute($sql, $data);
     }
 
+    public function fill(array $data = [])
+    {
+
+
+
+    }
+
 }

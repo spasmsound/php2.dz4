@@ -5,6 +5,6 @@ function __autoload($class) {
    if (file_exists($file)) {
        require_once $file;
    } else {
-       return false;
+       throw new \App\PageNFException();
    }
 }

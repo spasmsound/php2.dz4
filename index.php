@@ -12,9 +12,6 @@ $action = $parts[1] ?? 'Default';
 
 $class = '\App\Controllers\\' . $ctrl;
 
-if (!class_exists($class)) {
-    throw new \App\PageNFException();
-}
 
 try {
     $ctrl = new $class;
