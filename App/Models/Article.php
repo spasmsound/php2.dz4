@@ -63,4 +63,28 @@ class Article extends Model
         }
     }
 
+    public function setTitle($value)
+    {
+        if (strlen($value) > 3) {
+            throw new \Exception('Поле Заголовок больше 3-х символов');
+        }
+        $this->title = $value;
+    }
+
+    public function setContent($value)
+    {
+        if (strlen($value) > 3) {
+            throw new \Exception('Поле Текст больше 3-х символов');
+        }
+        $this->content = $value;
+    }
+
+    public function setAuthor_id($value)
+    {
+        if ($value < 1) {
+            throw new \Exception('Отрицательный Айди');
+        }
+
+    }
+
 }

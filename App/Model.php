@@ -123,11 +123,22 @@ abstract class Model
         $db->execute($sql, $data);
     }
 
-    public function fill(array $data = [])
+    public function fill(array $data)
     {
+        $errors = new Errors();
 
+        foreach ($data as $key => $value) {
+            try {
+                $method = 'set' . ucfirst($key);
+                $this->$method($value);
+            } catch (\Exception $e) {
+                $errors->add($e);
+            }
+        }
 
-
+        if (!$errors->isEmpty()) {
+            throw $errors;
+        }
     }
 
 }

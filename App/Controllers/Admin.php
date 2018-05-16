@@ -5,6 +5,7 @@ namespace App\Controllers;
 
 
 use App\Controller;
+use App\Errors;
 use App\Models\Article;
 
 class Admin extends Controller
@@ -29,10 +30,16 @@ class Admin extends Controller
         } else {
             $article = Article::findById($_GET['id']);
         }
-        $article->title = $_POST['title'];
-        $article->content = $_POST['content'];
+
+        try {
+            $article->fill($_POST);
+        } catch (Errors $e) {
+            foreach ($e->all() as $error) {
+                echo $error->getMessage() . '<br>';
+            }
+        }
         $article->save();
-        header('Location: /admin/');
+
     }
 
 }
