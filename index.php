@@ -14,6 +14,9 @@ $class = '\App\Controllers\\' . $ctrl;
 
 
 try {
+    if (!class_exists($class)) {
+    throw new \App\PageNFException();
+    }
     $ctrl = new $class;
     $ctrl->action($action);
 } catch (\App\DbException $error) {
