@@ -1,0 +1,6 @@
+{
+  "require": {
+    "runn/valueobjects": "*",
+    "psr/log": "*"
+  }
+}

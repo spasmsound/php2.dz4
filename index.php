@@ -2,6 +2,8 @@
 
 require __DIR__ . '/App/autoload.php';
 
+$log = new \App\Logger\Logger();
+
 $uri = $_SERVER['REQUEST_URI'];
 
 $parts = explode('/', trim($uri, '/'));
@@ -15,14 +17,16 @@ $class = '\App\Controllers\\' . $ctrl;
 
 try {
     if (!class_exists($class)) {
-    throw new \App\PageNFException();
+        throw new \App\PageNFException();
     }
     $ctrl = new $class;
     $ctrl->action($action);
 } catch (\App\DbException $error) {
+    $log->critical('Ошибка в БД');
     echo 'Ошибка в БД: ' . $error->getMessage();
     die;
 } catch (\App\PageNFException $error) {
+    $log->error('Ошибка 404');
     $action = 'Default';
     $class = '\App\Controllers\PageNF';
     $ctrl = new $class;

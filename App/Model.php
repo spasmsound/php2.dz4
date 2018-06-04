@@ -130,7 +130,11 @@ abstract class Model
         foreach ($data as $key => $value) {
             try {
                 $method = 'set' . ucfirst($key);
-                $this->$method($value);
+                if(method_exists($this, $method)) {
+                    $this->$method($value);
+                } else {
+                    $this->$key = $value;
+                }
             } catch (\Exception $e) {
                 $errors->add($e);
             }

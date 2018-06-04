@@ -1,0 +1,29 @@
+{
+  "name": "runn/valueobjects",
+  "description": "Runn Me! Value Objects Library",
+  "keywords": ["runn", "runn.me", "framework", "value object", "entity", "ddd"],
+  "type": "library",
+  "license": "LGPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Albert Stepantsev"
+    },
+    {
+      "name": "Alexey Maksarov",
+      "email": "aleksey.maksarov@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "runn/core" : "7.2.*",
+    "runn/validation" : "7.2.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Runn\\": "src/"
+    }
+  }
+}
